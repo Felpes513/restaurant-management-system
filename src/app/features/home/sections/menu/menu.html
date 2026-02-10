@@ -1,0 +1,59 @@
+<section id="cardapio" class="border-t border-white/10">
+  <div class="mx-auto max-w-6xl px-4 py-14">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h2 class="text-3xl font-bold tracking-tight">Cardápio</h2>
+        <p class="mt-2 text-zinc-300">Escolha o seu favorito.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <button
+          *ngFor="let cat of categorias"
+          (click)="selecionarCategoria(cat)"
+          class="rounded-xl border border-white/10 px-4 py-2 text-sm hover:bg-white/5"
+          [class.bg-amber-400]="categoriaSelecionada === cat"
+          [class.text-zinc-900]="categoriaSelecionada === cat"
+          [class.font-semibold]="categoriaSelecionada === cat"
+        >
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <article
+        *ngFor="let item of itensFiltrados"
+        class="overflow-hidden rounded-3xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+      >
+        <img
+          [src]="item.imagem"
+          [alt]="item.nome"
+          class="h-44 w-full object-cover"
+          loading="lazy"
+        />
+
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="text-lg font-semibold">{{ item.nome }}</h3>
+              <p class="mt-1 text-sm text-zinc-300">{{ item.desc }}</p>
+            </div>
+
+            <span
+              class="shrink-0 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-semibold text-amber-200 border border-amber-400/20"
+            >
+              {{ item.categoria }}
+            </span>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between">
+            <p class="text-xl font-bold text-amber-300">{{ formatarPreco(item.preco) }}</p>
+            <button class="rounded-xl border border-white/10 px-4 py-2 text-sm hover:bg-white/5">
+              Pedir
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
